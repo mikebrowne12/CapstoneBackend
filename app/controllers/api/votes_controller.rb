@@ -11,15 +11,25 @@ class Api::VotesController < ApplicationController
   end
 
   def create
-    @vote = Vote.new(
-      attraction_id: params[:attraction_id], 
-      value: params[:value]
-      )
-    if @vote.save
-      render json: {message: 'Vote created successfully'}, status: :created
+    # if the vote does not exist, continue creating the vote
+    # if the vote already exists, edit instead of create
+    @vote = Vote.find_by(user_id: current_user.id, attraction_id: params[:attraction_id])
+    if @vote
+      @vote.value = params[:value] || @vote.value
     else
-      render json: {errors: @vote.errors.full_messages}, status: :bad_request
+      @vote = Vote.new(
+        user_id: current_user.id, 
+        attraction_id: params[:attraction_id], 
+        value: params[:value]
+        )
+      @vote.save
     end
+
+    # if @vote.save
+    #   render json: {message: 'Vote created successfully'}, status: :created
+    # else
+    #   render json: {errors: @vote.errors.full_messages}, status: :bad_request
+    # end
 
   end
 

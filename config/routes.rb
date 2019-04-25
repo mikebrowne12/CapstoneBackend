@@ -26,5 +26,8 @@ Rails.application.routes.draw do
     get "/votes" => "votes#index"
     post "/votes" => "votes#create"
     get "/votes/:id" => "votes#show"
+
+    post "/sessions" => "sessions#create"
+
   end
 end

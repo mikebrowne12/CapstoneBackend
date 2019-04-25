@@ -7,6 +7,7 @@ class Api::NeighborhoodsController < ApplicationController
 
   def show
     @neighborhood = Neighborhood.find_by(id: params[:id])
+    @user = current_user
     render "show.json.jbuilder"
   end
 
