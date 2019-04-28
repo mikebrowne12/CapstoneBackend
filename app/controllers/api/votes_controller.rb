@@ -15,8 +15,10 @@ class Api::VotesController < ApplicationController
     # if the vote already exists, edit instead of create
     @vote = Vote.find_by(user_id: current_user.id, attraction_id: params[:attraction_id])
     if @vote
-      @vote.value = params[:value] || @vote.value
+      @vote.value = params[:value]
+      @vote.save
     else
+      puts "else statement"
       @vote = Vote.new(
         user_id: current_user.id, 
         attraction_id: params[:attraction_id], 
@@ -24,12 +26,6 @@ class Api::VotesController < ApplicationController
         )
       @vote.save
     end
-
-    # if @vote.save
-    #   render json: {message: 'Vote created successfully'}, status: :created
-    # else
-    #   render json: {errors: @vote.errors.full_messages}, status: :bad_request
-    # end
 
   end
 

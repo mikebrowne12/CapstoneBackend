@@ -1,7 +1,7 @@
 class Api::NeighborhoodsController < ApplicationController
 
   def index
-    @neighborhoods = Neighborhood.all 
+    @neighborhoods = Neighborhood.all
     render "index.json.jbuilder"
   end
 

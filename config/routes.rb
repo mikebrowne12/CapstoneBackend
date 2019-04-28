@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     delete "/neighborhoods/:id" => "neighborhoods#destroy"
 
     get "/votes" => "votes#index"
-    post "/votes" => "votes#create"
+    put "/votes" => "votes#create"
     get "/votes/:id" => "votes#show"
 
     post "/sessions" => "sessions#create"
