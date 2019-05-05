@@ -1,4 +1,5 @@
 class Api::NeighborhoodsController < ApplicationController
+  require "http"
 
   def index
     @neighborhoods = Neighborhood.all
@@ -9,6 +10,13 @@ class Api::NeighborhoodsController < ApplicationController
     @neighborhood = Neighborhood.find_by(id: params[:id])
     @user = current_user
     render "show.json.jbuilder"
+  end
+
+  def weather
+    url = HTTP.get("http://api.openweathermap.org/data/2.5/weather?q=Chicago&units=imperial&appid=#{ENV["API_KEY"]}")
+    data = url.parse
+    temperature = data
+    render json: temperature
   end
 
   def create

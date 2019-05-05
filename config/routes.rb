@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     patch "/neighborhoods/:id" => "neighborhoods#update"
     delete "/neighborhoods/:id" => "neighborhoods#destroy"
 
+    get "/weather" => "neighborhoods#weather"
+
     get "/votes" => "votes#index"
     put "/votes" => "votes#create"
     get "/votes/:id" => "votes#show"
