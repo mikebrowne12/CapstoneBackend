@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     get "/weather" => "neighborhoods#weather"
 
     get "/votes" => "votes#index"
-    put "/votes" => "votes#create"
+    patch "/votes" => "votes#create"
     get "/votes/:id" => "votes#show"
 
     post "/sessions" => "sessions#create"
